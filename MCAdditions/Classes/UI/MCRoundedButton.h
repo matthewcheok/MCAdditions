@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCBorderedButton : UIButton
+@interface MCRoundedButton : UIButton
 
-@property (strong, nonatomic) UIColor *selectedTintColor UI_APPEARANCE_SELECTOR;
+@property (strong, nonatomic) UIColor *selectedTitleColor UI_APPEARANCE_SELECTOR;
 
 @end

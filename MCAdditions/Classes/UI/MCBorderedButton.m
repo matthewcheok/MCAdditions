@@ -25,10 +25,13 @@
 	_borderLayer.lineWidth = 1;
 	_borderLayer.strokeColor = [UIColor blackColor].CGColor;
 	_borderLayer.fillColor = nil;
+	_borderLayer.actions = @{ @"strokeColor": [NSNull null] };
 	[self.layer addSublayer:_borderLayer];
 
 	self.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    [self tintColorDidChange];
+    _selectedTintColor = [UIColor blackColor];
+    
+	[self tintColorDidChange];
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -40,11 +43,11 @@
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setup];
-    }
-    return self;
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		[self setup];
+	}
+	return self;
 }
 
 - (void)layoutSubviews {
@@ -55,21 +58,29 @@
 #pragma mark - Methods
 
 - (void)updateState {
-    UIColor *color = [self isHighlighted] ? [UIColor blackColor] : self.tintColor;
-    self.borderLayer.strokeColor = color.CGColor;
+	UIColor *color = [self isHighlighted] ? self.selectedTintColor : self.tintColor;
+	self.borderLayer.strokeColor = color.CGColor;
 }
 
 - (void)tintColorDidChange {
-    [super tintColorDidChange];
-    [self updateState];
-    
-    [self setTitleColor:self.tintColor forState:UIControlStateNormal];
-    [self setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+	[super tintColorDidChange];
+	[self updateState];
+
+	[self setTitleColor:self.tintColor forState:UIControlStateNormal];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
-    [super setHighlighted:highlighted];
-    [self updateState];
+	[super setHighlighted:highlighted];
+	[self updateState];
+}
+
+#pragma mark - Properties
+
+- (void)setSelectedTintColor:(UIColor *)selectedTintColor {
+    _selectedTintColor = selectedTintColor;
+    
+    [self setTitleColor:selectedTintColor forState:UIControlStateHighlighted];
+	[self setTitleColor:selectedTintColor forState:UIControlStateSelected];
 }
 
 @end
