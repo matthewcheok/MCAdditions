@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
       :branch => 'master',
       :tag => s.version.to_s
   }
-  s.source_files = 'MCAdditions/*.{h,m}'
+  s.source_files = 'MCAdditions/**/*.{h,m}'
   s.dependency 'Mantle', '~> 1.3.1'
 end
