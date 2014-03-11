@@ -16,6 +16,10 @@ typedef NS_ENUM(NSInteger, MCViewAnimationStyle) {
 
 @interface UIView (MCAdditions)
 
+#pragma mark - Snapshot
+
+- (UIImage *)snapshotImageAfterScreenUpdates:(BOOL)updates;
+
 #pragma mark - Utility
 
 - (NSArray *)subviewsOfKindOfClass:(Class)class;

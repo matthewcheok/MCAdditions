@@ -37,7 +37,8 @@ static CGFloat const kMCRoundedButtonInset = 2;
     [self.layer insertSublayer:_fillLayer atIndex:0];
 
 	self.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    _selectedTitleColor = [UIColor blackColor];
+    _selectedTitleColor = [UIColor whiteColor];
+
     [self tintColorDidChange];
 }
 

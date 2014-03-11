@@ -10,6 +10,18 @@
 
 @implementation UIView (MCAdditions)
 
+#pragma mark - Snapshot
+
+- (UIImage *)snapshotImageAfterScreenUpdates:(BOOL)updates {
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
+    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:updates];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 #pragma mark - Utility
 
 - (NSArray *)subviewsOfKindOfClass:(Class)class {
