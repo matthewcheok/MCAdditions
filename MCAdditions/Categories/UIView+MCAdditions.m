@@ -39,6 +39,16 @@
 	return subviews;
 }
 
+- (UIView *)superviewOfKindOfClass:(Class)class {
+    UIView *superview = [self superview];
+    while (![superview isKindOfClass:class] && [superview superview] != nil)
+        superview = [superview superview];
+    if ([superview isKindOfClass:class]) {
+        return superview;
+    }
+    return nil;
+}
+
 #pragma mark - Animation
 
 - (void)performAnimationWithStyle:(MCViewAnimationStyle)style duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay completion:(void (^)(BOOL finished))completion {

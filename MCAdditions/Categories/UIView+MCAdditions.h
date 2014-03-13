@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, MCViewAnimationStyle) {
 #pragma mark - Utility
 
 - (NSArray *)subviewsOfKindOfClass:(Class)class;
+- (UIView *)superviewOfKindOfClass:(Class)class;
 
 #pragma mark - Animation
 
