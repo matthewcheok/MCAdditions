@@ -13,13 +13,13 @@
 #pragma mark - Snapshot
 
 - (UIImage *)snapshotImageAfterScreenUpdates:(BOOL)updates {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
-    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:updates];
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
+	UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
+	[self drawViewHierarchyInRect:self.bounds afterScreenUpdates:updates];
+
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+
+	return image;
 }
 
 #pragma mark - Utility
@@ -30,23 +30,23 @@
 		if ([view isKindOfClass:class]) {
 			[subviews addObject:view];
 		}
-        
+
 		// traverse further down subviews
 		NSArray *subviewsOfView = [view subviewsOfKindOfClass:class];
 		[subviews addObjectsFromArray:subviewsOfView];
 	}
-    
+
 	return subviews;
 }
 
 - (UIView *)superviewOfKindOfClass:(Class)class {
-    UIView *superview = [self superview];
-    while (![superview isKindOfClass:class] && [superview superview] != nil)
-        superview = [superview superview];
-    if ([superview isKindOfClass:class]) {
-        return superview;
-    }
-    return nil;
+	UIView *superview = [self superview];
+	while (![superview isKindOfClass:class] && [superview superview] != nil)
+		superview = [superview superview];
+	if ([superview isKindOfClass:class]) {
+		return superview;
+	}
+	return nil;
 }
 
 #pragma mark - Animation
@@ -56,11 +56,11 @@
 		case MCViewAnimationStylePop:
 			[self performAnimationInPopStyleWithDuration:duration delay:delay completion:completion];
 			break;
-            
+
 		case MCViewAnimationStyleMorph:
 			[self performAnimationInMorphStyleWithDuration:duration delay:delay completion:completion];
 			break;
-            
+
 		default:
 			break;
 	}
@@ -105,6 +105,33 @@
 	        completion(finished);
 		}
 	}];
+}
+
+- (void)performShakeAnimationWithDirection:(MCViewShakeDirection)direction numberOfTimes:(NSUInteger)times duration:(NSTimeInterval)duration delta:(CGFloat)delta completion:(void (^)(BOOL finished))completion {
+	__weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:duration delay:0 options:0 animations:^{
+        typeof(self) strongSelf = weakSelf;
+        strongSelf.transform = (direction == MCViewShakeDirectionHorizontal) ?CGAffineTransformMakeTranslation(delta, 0) : CGAffineTransformMakeTranslation(0, delta);
+    } completion:^(BOOL finished) {
+        if (times <= 1) {
+            [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                typeof(self) strongSelf = weakSelf;
+                strongSelf.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+        }
+        else {
+            typeof(self) strongSelf = weakSelf;
+            [strongSelf performShakeAnimationWithDirection:direction numberOfTimes:times-1 duration:duration delta:-delta completion:completion];
+        }
+    }];
+}
+
+- (void)performHorizontalShakeAnimationWithCompletion:(void (^)(BOOL finished))completion {
+    [self performShakeAnimationWithDirection:MCViewShakeDirectionHorizontal numberOfTimes:10 duration:0.04 delta:5 completion:completion];
 }
 
 @end

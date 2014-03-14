@@ -14,6 +14,11 @@ typedef NS_ENUM(NSInteger, MCViewAnimationStyle) {
     MCViewAnimationStyleMorph
 };
 
+typedef NS_ENUM(NSInteger, MCViewShakeDirection) {
+    MCViewShakeDirectionHorizontal = 0,
+    MCViewShakeDirectionVertical
+};
+
 @interface UIView (MCAdditions)
 
 #pragma mark - Snapshot
@@ -28,5 +33,7 @@ typedef NS_ENUM(NSInteger, MCViewAnimationStyle) {
 #pragma mark - Animation
 
 - (void)performAnimationWithStyle:(MCViewAnimationStyle)style duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay completion:(void (^)(BOOL finished))completion;
+- (void)performShakeAnimationWithDirection:(MCViewShakeDirection)direction numberOfTimes:(NSUInteger)times duration:(NSTimeInterval)duration delta:(CGFloat)delta completion:(void (^)(BOOL finished))completion;
+- (void)performHorizontalShakeAnimationWithCompletion:(void (^)(BOOL finished))completion;
 
 @end
