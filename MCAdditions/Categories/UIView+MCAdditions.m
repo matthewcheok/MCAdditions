@@ -24,6 +24,29 @@
 
 #pragma mark - Utility
 
+- (NSArray *)gestureRecognizersOfKindOfClass:(Class)class {
+	NSMutableArray *recognizers = [NSMutableArray array];
+    for (UIGestureRecognizer *recognizer in self.gestureRecognizers) {
+        if ([recognizer isKindOfClass:class]) {
+            [recognizers addObject:recognizer];
+        }
+    }
+    
+	for (UIView *view in self.subviews) {
+        for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+            if ([recognizer isKindOfClass:class]) {
+                [recognizers addObject:recognizer];
+            }
+        }
+        
+		// traverse further down subviews
+		NSArray *recognizersOfSubviews = [view gestureRecognizersOfKindOfClass:class];
+		[recognizers addObjectsFromArray:recognizersOfSubviews];
+	}
+    
+	return recognizers;
+}
+
 - (NSArray *)subviewsOfKindOfClass:(Class)class {
 	NSMutableArray *subviews = [NSMutableArray array];
 	for (UIView *view in self.subviews) {

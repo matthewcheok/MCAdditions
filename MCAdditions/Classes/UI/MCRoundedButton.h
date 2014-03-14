@@ -11,5 +11,6 @@
 @interface MCRoundedButton : UIButton
 
 @property (strong, nonatomic) UIColor *selectedTitleColor UI_APPEARANCE_SELECTOR;
+@property (assign, nonatomic, getter = isAnimating) BOOL animating;
 
 @end

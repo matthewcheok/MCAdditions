@@ -64,8 +64,8 @@ static CGFloat const kMCRoundedButtonInset = 2;
     CGRect bounds = self.bounds;
     CGFloat radius = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds))/2;
     
-	_borderLayer.path = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:radius].CGPath;
-    _fillLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(bounds, kMCRoundedButtonInset, kMCRoundedButtonInset) cornerRadius:radius-kMCRoundedButtonInset].CGPath;
+	self.borderLayer.path = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:radius].CGPath;
+    self.fillLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(bounds, kMCRoundedButtonInset, kMCRoundedButtonInset) cornerRadius:radius-kMCRoundedButtonInset].CGPath;
 }
 
 #pragma mark - Methods
@@ -94,6 +94,27 @@ static CGFloat const kMCRoundedButtonInset = 2;
     
     [self setTitleColor:selectedTitleColor forState:UIControlStateHighlighted];
     [self setTitleColor:selectedTitleColor forState:UIControlStateSelected];
+}
+
+- (void)setAnimating:(BOOL)animating {
+    _animating = animating;
+    self.userInteractionEnabled = !animating;
+    
+    if (!animating && [self.borderLayer animationForKey:@"linePhase"]) {
+        [self.borderLayer removeAnimationForKey:@"linePhase"];
+        self.borderLayer.lineDashPattern = nil;
+    }
+    else {
+        self.borderLayer.lineDashPattern = @[@12, @4];
+        
+        CABasicAnimation *dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
+        [dashAnimation setFromValue:@0];
+        [dashAnimation setToValue:@(-16)];
+        [dashAnimation setDuration:0.5];
+        [dashAnimation setRepeatCount:HUGE_VAL];
+        
+        [self.borderLayer addAnimation:dashAnimation forKey:@"linePhase"];
+    }
 }
 
 @end
