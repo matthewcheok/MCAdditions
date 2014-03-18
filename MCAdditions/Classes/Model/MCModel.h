@@ -50,4 +50,6 @@
  */
 - (BOOL)updateWithJSONDictionary:(NSDictionary *)JSONDictionary error:(NSError **)error;
 
+- (NSDictionary *)JSONDictionary;
+
 @end

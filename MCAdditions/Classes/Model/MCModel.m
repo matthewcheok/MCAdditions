@@ -72,6 +72,12 @@ static NSString* MCTypeStringFromPropertyKey(Class class, NSString *key) {
 	return nil;
 }
 
+#pragma mark - Properties
+
+- (NSDictionary *)JSONDictionary {
+    return [MTLJSONAdapter JSONDictionaryFromModel:self];
+}
+
 #pragma mark - Methods
 
 + (instancetype)modelWithJSONDictionary:(NSDictionary *)JSONDictionary error:(NSError **)error {
