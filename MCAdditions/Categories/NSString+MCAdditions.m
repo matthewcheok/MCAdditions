@@ -7,9 +7,12 @@
 //
 
 #import "NSString+MCAdditions.h"
-#import <NSRange+Conventional.h>
+#import "NSRange+Conventional.h"
+#import <ISO8601DateFormatter.h>
 
 @implementation NSString (MCAdditions)
+
+#pragma mark - Validation
 
 - (BOOL)isValidEmailAddress {
     NSRange range = NSRangeMake(0, [self length]);

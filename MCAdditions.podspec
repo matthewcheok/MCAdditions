@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'MCAdditions'
-  s.version  = '0.1.5'
+  s.version  = '0.1.6'
   s.platform = :ios, '7.0'
   s.license  = { :type => 'MIT', :file => 'LICENSE' }
   s.summary  = 'A host of useful utilties for any iOS application.'
@@ -13,7 +13,9 @@ Pod::Spec.new do |s|
     :tag => s.version.to_s
   }
   s.source_files = 'MCAdditions/MCAdditions.h'
+
   s.dependency 'Mantle', '~> 1.4.1'
+  s.dependency 'ISO8601DateFormatter', '~> 0.7'
 
   s.subspec 'Model' do |ss|
     ss.source_files = 'MCAdditions/Classes/Model/*.{h,m}'

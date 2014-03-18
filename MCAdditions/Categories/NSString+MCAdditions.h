@@ -10,6 +10,8 @@
 
 @interface NSString (MCAdditions)
 
+#pragma mark - Validation
+
 - (BOOL)isValidEmailAddress;
 - (BOOL)isValidPhoneNumber;
 
