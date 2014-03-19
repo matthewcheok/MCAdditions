@@ -21,6 +21,7 @@ static CGFloat const kMCAlertViewMessageFontSize = 16;
 static CGFloat const kMCAlertViewButtonFontSize = 16;
 static CGFloat const kMCAlertViewButtonHeight = 30;
 static CGFloat const kMCAlertViewAngleRange = 15;
+static CGFloat const kMCAlertViewMotionOffset = 15;
 
 @interface MCAlertView ()
 
@@ -102,6 +103,16 @@ static CGFloat const kMCAlertViewAngleRange = 15;
         self.layer.shadowRadius = 10.f;
         self.layer.shadowOffset = CGSizeZero;
         self.completionHandler = completion;
+        
+        UIInterpolatingMotionEffect *horizontalEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+        horizontalEffect.minimumRelativeValue = @(-kMCAlertViewMotionOffset);
+        horizontalEffect.maximumRelativeValue = @(kMCAlertViewMotionOffset);
+        [self addMotionEffect:horizontalEffect];
+        
+        UIInterpolatingMotionEffect *verticalEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+        verticalEffect.minimumRelativeValue = @(-kMCAlertViewMotionOffset);
+        verticalEffect.maximumRelativeValue = @(kMCAlertViewMotionOffset);
+        [self addMotionEffect:verticalEffect];
 
         [self setNeedsLayout];
     }
