@@ -10,6 +10,10 @@
 
 @interface NSString (MCAdditions)
 
+#pragma mark - Convenience
+
+- (BOOL)isNotEmpty;
+
 #pragma mark - Validation
 
 - (BOOL)isValidEmailAddress;

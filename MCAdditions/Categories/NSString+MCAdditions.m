@@ -12,6 +12,12 @@
 
 @implementation NSString (MCAdditions)
 
+#pragma mark - Convenience
+
+- (BOOL)isNotEmpty {
+    return ![self isEqualToString:@""];
+}
+
 #pragma mark - Validation
 
 - (BOOL)isValidEmailAddress {
