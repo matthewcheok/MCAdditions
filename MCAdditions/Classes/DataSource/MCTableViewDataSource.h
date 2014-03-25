@@ -15,5 +15,6 @@ typedef void (^MCTableViewConfigureCellBlock)(id cell, id item);
 @property (strong, nonatomic) NSArray *items;
 
 - (instancetype)initWithItems:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(MCTableViewConfigureCellBlock)configureCellBlock;
+- (id)itemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

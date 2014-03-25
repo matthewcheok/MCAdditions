@@ -19,10 +19,6 @@ static CGFloat const kMCRoundedButtonInset = 2;
 
 @implementation MCRoundedButton
 
-+ (void)load {
-	[[self appearance] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-}
-
 - (void)setup {
 	_borderLayer = [CAShapeLayer layer];
 	_borderLayer.lineWidth = kMCRoundedButtonInset;
@@ -36,11 +32,12 @@ static CGFloat const kMCRoundedButtonInset = 2;
 	_borderLayer.actions = @{ @"fillColor": [NSNull null] };
     [self.layer insertSublayer:_fillLayer atIndex:0];
 
-	self.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    _selectedTitleColor = [UIColor whiteColor];
+	self.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.selectedTitleColor = [UIColor whiteColor];
 
     [self tintColorDidChange];
 }
+
 
 - (id)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];

@@ -15,5 +15,6 @@ typedef void (^MCCollectionViewConfigureCellBlock)(id cell, id item);
 @property (strong, nonatomic) NSArray *items;
 
 - (instancetype)initWithItems:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(MCCollectionViewConfigureCellBlock)configureCellBlock;
+- (id)itemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
