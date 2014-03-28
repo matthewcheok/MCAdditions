@@ -33,8 +33,12 @@ typedef NS_ENUM(NSInteger, MCViewShakeDirection) {
 
 #pragma mark - Animation
 
++ (void)animateWithKeyboardNotification:(NSNotification *)notification delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
+
 - (void)performAnimationWithStyle:(MCViewAnimationStyle)style duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay completion:(void (^)(BOOL finished))completion;
+
 - (void)performShakeAnimationWithDirection:(MCViewShakeDirection)direction numberOfTimes:(NSUInteger)times duration:(NSTimeInterval)duration delta:(CGFloat)delta completion:(void (^)(BOOL finished))completion;
+
 - (void)performHorizontalShakeAnimationWithCompletion:(void (^)(BOOL finished))completion;
 
 @end
