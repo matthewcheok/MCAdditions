@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^MCKeyboardObserverAnimationBlock)(NSString *notificationName, CGRect keyboardFrame);
-typedef void (^MCKeyboardObserverCompletionBlock)(NSString *notificationName, BOOL finished);
+typedef void (^MCKeyboardObserverShowAnimationBlock)(CGRect keyboardFrame);
+typedef void (^MCKeyboardObserverHideAnimationBlock)(CGRect keyboardFrame);
 
 @interface MCKeyboardObserver : NSObject
 
 @property (weak, nonatomic, readonly) UIView *view;
-@property (copy, nonatomic, readonly) MCKeyboardObserverAnimationBlock animations;
-@property (copy, nonatomic, readonly) MCKeyboardObserverCompletionBlock completion;
+@property (copy, nonatomic, readonly) MCKeyboardObserverShowAnimationBlock showAnimations;
+@property (copy, nonatomic, readonly) MCKeyboardObserverHideAnimationBlock hideAnimations;
 
-+ (instancetype)observerInView:(UIView *)view animations:(MCKeyboardObserverAnimationBlock)animations completion:(MCKeyboardObserverCompletionBlock)completion;
++ (instancetype)observerInView:(UIView *)view showAnimations:(MCKeyboardObserverShowAnimationBlock)showAnimations hideAnimations:(MCKeyboardObserverHideAnimationBlock)hideAnimations;
 
-- (instancetype)initInView:(UIView *)view animations:(MCKeyboardObserverAnimationBlock)animations completion:(MCKeyboardObserverCompletionBlock)completion;
+- (instancetype)initInView:(UIView *)view showAnimations:(MCKeyboardObserverShowAnimationBlock)showAnimations hideAnimations:(MCKeyboardObserverHideAnimationBlock)hideAnimations;
 
 @end

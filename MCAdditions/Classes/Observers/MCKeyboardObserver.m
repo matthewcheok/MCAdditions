@@ -12,23 +12,23 @@
 @interface MCKeyboardObserver ()
 
 @property (weak, nonatomic) UIView *view;
-@property (copy, nonatomic) MCKeyboardObserverAnimationBlock animations;
-@property (copy, nonatomic) MCKeyboardObserverCompletionBlock completion;
+@property (copy, nonatomic) MCKeyboardObserverShowAnimationBlock showAnimations;
+@property (copy, nonatomic) MCKeyboardObserverHideAnimationBlock hideAnimations;
 
 @end
 
 @implementation MCKeyboardObserver
 
-+ (instancetype)observerInView:(UIView *)view animations:(MCKeyboardObserverAnimationBlock)animations completion:(MCKeyboardObserverCompletionBlock)completion {
-    return [[self alloc] initInView:view animations:animations completion:completion];
++ (instancetype)observerInView:(UIView *)view showAnimations:(MCKeyboardObserverShowAnimationBlock)showAnimations hideAnimations:(MCKeyboardObserverHideAnimationBlock)hideAnimations {
+    return [[self alloc] initInView:view showAnimations:showAnimations hideAnimations:hideAnimations];
 }
 
-- (instancetype)initInView:(UIView *)view animations:(MCKeyboardObserverAnimationBlock)animations completion:(MCKeyboardObserverCompletionBlock)completion {
+- (instancetype)initInView:(UIView *)view showAnimations:(MCKeyboardObserverShowAnimationBlock)showAnimations hideAnimations:(MCKeyboardObserverHideAnimationBlock)hideAnimations {
     self = [super init];
     if (self) {
         _view = view;
-        _animations = [animations copy];
-        _completion = [completion copy];
+        _showAnimations = [showAnimations copy];
+        _hideAnimations = [hideAnimations copy];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -48,7 +48,7 @@
     __weak typeof(self) weakSelf = self;
     [UIView animateWithKeyboardNotification:notification delay:0 options:0 animations:^{
 	    typeof(self) strongSelf = weakSelf;
-        strongSelf.animations(notification.name, keyboardFrame);
+        strongSelf.showAnimations(keyboardFrame);
     } completion:nil];
 }
 
@@ -59,7 +59,7 @@
     __weak typeof(self) weakSelf = self;
     [UIView animateWithKeyboardNotification:notification delay:0 options:0 animations:^{
 	    typeof(self) strongSelf = weakSelf;
-        strongSelf.animations(notification.name, keyboardFrame);
+        strongSelf.hideAnimations(keyboardFrame);
     } completion:nil];
 }
 
