@@ -7,6 +7,8 @@
 //
 
 #import "MCModel.h"
+
+#import <MTLReflection.h>
 #import <objc/runtime.h>
 
 @implementation MCModel
@@ -33,7 +35,7 @@ static NSString* MCTypeStringFromPropertyKey(Class class, NSString *key) {
 	return nil;
 }
 
-+ (Class)classOfCollectionItemsForPropertyKey:(NSString *)key {
++ (Class)collectionItemClassForKey:(NSString *)key {
 	return nil;
 }
 
@@ -53,7 +55,21 @@ static NSString* MCTypeStringFromPropertyKey(Class class, NSString *key) {
     
     // array
 	else if ([class isSubclassOfClass:[NSArray class]]) {
-		Class collectionClass = [self classOfCollectionItemsForPropertyKey:key];
+        Class collectionClass = nil;
+        
+        SEL selector = MTLSelectorWithKeyPattern(key, "CollectionItemClass");
+        if ([self respondsToSelector:selector]) {
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+            invocation.target = self;
+            invocation.selector = selector;
+            [invocation invoke];
+            
+            [invocation getReturnValue:&collectionClass];
+        }
+        else if ([self respondsToSelector:@selector(collectionItemClassForKey:)]) {
+            collectionClass = [self collectionItemClassForKey:key];
+        }
+        
 		if ([collectionClass isSubclassOfClass:[MCModel class]]) {
 			return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:collectionClass];
 		}

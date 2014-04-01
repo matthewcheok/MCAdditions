@@ -38,7 +38,7 @@
  *
  *  @return Class of items in collection
  */
-+ (Class)classOfCollectionItemsForPropertyKey:(NSString *)key;
++ (Class)collectionItemClassForKey:(NSString *)key;
 
 /**
  *  Updates properties of current model from JSON dictionary representation
