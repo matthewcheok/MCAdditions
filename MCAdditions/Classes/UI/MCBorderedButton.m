@@ -1,6 +1,6 @@
 //
 //  MCBorderedButton.m
-//  CustomControls
+//  MCAdditions
 //
 //  Created by Matthew Cheok on 6/2/14.
 //  Copyright (c) 2014 Matthew Cheok. All rights reserved.
@@ -30,7 +30,7 @@
 
 	self.titleLabel.font = [UIFont boldSystemFontOfSize:13];
     _selectedTintColor = [UIColor blackColor];
-    
+
 	[self tintColorDidChange];
 }
 
@@ -78,7 +78,7 @@
 
 - (void)setSelectedTintColor:(UIColor *)selectedTintColor {
     _selectedTintColor = selectedTintColor;
-    
+
     [self setTitleColor:selectedTintColor forState:UIControlStateHighlighted];
 	[self setTitleColor:selectedTintColor forState:UIControlStateSelected];
 }

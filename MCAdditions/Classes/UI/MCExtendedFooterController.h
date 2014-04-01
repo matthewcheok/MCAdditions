@@ -1,6 +1,6 @@
 //
 //  MCExtendedFooterController.h
-//  Pods
+//  MCAdditions
 //
 //  Created by Matthew Cheok on 25/3/14.
 //

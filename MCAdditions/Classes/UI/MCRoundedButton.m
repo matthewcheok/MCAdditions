@@ -1,6 +1,6 @@
 //
 //  MCBorderedButton.m
-//  CustomControls
+//  MCAdditions
 //
 //  Created by Matthew Cheok on 6/2/14.
 //  Copyright (c) 2014 Matthew Cheok. All rights reserved.
@@ -26,7 +26,7 @@ static CGFloat const kMCRoundedButtonInset = 2;
 	_borderLayer.fillColor = nil;
 	_borderLayer.actions = @{ @"strokeColor": [NSNull null] };
 	[self.layer addSublayer:_borderLayer];
-    
+
     _fillLayer = [CAShapeLayer layer];
     _fillLayer.fillColor = nil;
 	_borderLayer.actions = @{ @"fillColor": [NSNull null] };
@@ -57,10 +57,10 @@ static CGFloat const kMCRoundedButtonInset = 2;
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-    
+
     CGRect bounds = self.bounds;
     CGFloat radius = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds))/2;
-    
+
 	self.borderLayer.path = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:radius].CGPath;
     self.fillLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(bounds, kMCRoundedButtonInset, kMCRoundedButtonInset) cornerRadius:radius-kMCRoundedButtonInset].CGPath;
 }
@@ -88,7 +88,7 @@ static CGFloat const kMCRoundedButtonInset = 2;
 
 - (void)setSelectedTitleColor:(UIColor *)selectedTitleColor {
     _selectedTitleColor = selectedTitleColor;
-    
+
     [self setTitleColor:selectedTitleColor forState:UIControlStateHighlighted];
     [self setTitleColor:selectedTitleColor forState:UIControlStateSelected];
 }
@@ -96,20 +96,20 @@ static CGFloat const kMCRoundedButtonInset = 2;
 - (void)setAnimating:(BOOL)animating {
     _animating = animating;
     self.userInteractionEnabled = !animating;
-    
+
     if (!animating && [self.borderLayer animationForKey:@"linePhase"]) {
         [self.borderLayer removeAnimationForKey:@"linePhase"];
         self.borderLayer.lineDashPattern = nil;
     }
     else {
         self.borderLayer.lineDashPattern = @[@12, @4];
-        
+
         CABasicAnimation *dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
         [dashAnimation setFromValue:@0];
         [dashAnimation setToValue:@(-16)];
         [dashAnimation setDuration:0.5];
         [dashAnimation setRepeatCount:HUGE_VAL];
-        
+
         [self.borderLayer addAnimation:dashAnimation forKey:@"linePhase"];
     }
 }

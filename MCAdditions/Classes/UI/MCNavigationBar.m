@@ -1,6 +1,6 @@
 //
 //  MCNavigationBar.m
-//  GSX
+//  MCAdditions
 //
 //  Created by Matthew Cheok on 10/10/13.
 //  Copyright (c) 2013 Matthew Cheok. All rights reserved.
@@ -33,7 +33,7 @@ static CGFloat const kSpaceToCoverStatusBars = 20.0f;
     [super layoutSubviews];
     if (self.colorLayer != nil) {
         self.colorLayer.frame = CGRectMake(0, 0 - kSpaceToCoverStatusBars, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + kSpaceToCoverStatusBars);
-        
+
         [self.layer insertSublayer:self.colorLayer atIndex:1];
     }
 }
