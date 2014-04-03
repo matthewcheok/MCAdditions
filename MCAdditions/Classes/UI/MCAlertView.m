@@ -184,7 +184,7 @@ static CGFloat const kMCAlertViewMotionOffset = 15;
     [window addSubview:self.backgroundView];
 
     @weakify(self);
-    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         @strongify(self);
         self.backgroundView.alpha = 0.5f;
     } completion:nil];
@@ -194,7 +194,7 @@ static CGFloat const kMCAlertViewMotionOffset = 15;
     self.center = CGPointMake(floorf(CGRectGetWidth(bounds)/2.f),
                               -floorf(CGRectGetHeight(self.frame)/2.f));
 
-    [UIView animateWithDuration:0.3f delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationCurveEaseOut animations:^{
         @strongify(self);
         self.center = CGPointMake(floorf(CGRectGetWidth(bounds)/2.f),
                                   floorf(CGRectGetHeight(bounds)/2.f));
