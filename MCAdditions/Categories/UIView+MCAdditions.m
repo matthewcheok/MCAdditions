@@ -168,7 +168,7 @@
 
 @end
 
-@implementation UIViewController (MCAdditions)
+@implementation UIViewController (MCAdditions_UIView)
 
 - (void)presentViewController:(UIViewController *)viewController inNavigationControllerWithTransitioningDelegate:(id <UIViewControllerTransitioningDelegate> )delegate animated:(BOOL)animated completion:(void (^)(void))completion {
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];

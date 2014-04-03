@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, MCViewShakeDirection) {
 
 @end
 
-@interface UIViewController (MCAdditions)
+@interface UIViewController (MCAdditions_UIView)
 
 - (void)presentViewController:(UIViewController *)viewController inNavigationControllerWithTransitioningDelegate:(id<UIViewControllerTransitioningDelegate>)delegate animated:(BOOL)animated completion:(void (^)(void))completion;
 
