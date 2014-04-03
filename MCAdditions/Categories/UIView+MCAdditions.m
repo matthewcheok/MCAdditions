@@ -7,6 +7,7 @@
 //
 
 #import "UIView+MCAdditions.h"
+#import "NSObject+MCAdditions.h"
 
 @implementation UIView (MCAdditions)
 
@@ -26,24 +27,24 @@
 
 - (NSArray *)gestureRecognizersOfKindOfClass:(Class)class {
 	NSMutableArray *recognizers = [NSMutableArray array];
-    for (UIGestureRecognizer *recognizer in self.gestureRecognizers) {
-        if ([recognizer isKindOfClass:class]) {
-            [recognizers addObject:recognizer];
-        }
-    }
-    
+	for (UIGestureRecognizer *recognizer in self.gestureRecognizers) {
+		if ([recognizer isKindOfClass:class]) {
+			[recognizers addObject:recognizer];
+		}
+	}
+
 	for (UIView *view in self.subviews) {
-        for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
-            if ([recognizer isKindOfClass:class]) {
-                [recognizers addObject:recognizer];
-            }
-        }
-        
+		for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+			if ([recognizer isKindOfClass:class]) {
+				[recognizers addObject:recognizer];
+			}
+		}
+
 		// traverse further down subviews
 		NSArray *recognizersOfSubviews = [view gestureRecognizersOfKindOfClass:class];
 		[recognizers addObjectsFromArray:recognizersOfSubviews];
 	}
-    
+
 	return recognizers;
 }
 
@@ -75,10 +76,10 @@
 #pragma mark - Animation
 
 + (void)animateWithKeyboardNotification:(NSNotification *)notification delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion {
-    NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationOptions option = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue] << 16;
-    
-    [UIView animateWithDuration:duration delay:0 options:options|option animations:animations completion:completion];
+	NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	UIViewAnimationOptions option = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue] << 16;
+
+	[UIView animateWithDuration:duration delay:0 options:options | option animations:animations completion:completion];
 }
 
 - (void)performAnimationWithStyle:(MCViewAnimationStyle)style duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay completion:(void (^)(BOOL finished))completion {
@@ -139,29 +140,45 @@
 
 - (void)performShakeAnimationWithDirection:(MCViewShakeDirection)direction numberOfTimes:(NSUInteger)times duration:(NSTimeInterval)duration delta:(CGFloat)delta completion:(void (^)(BOOL finished))completion {
 	__weak typeof(self) weakSelf = self;
-    [UIView animateWithDuration:duration delay:0 options:0 animations:^{
-        typeof(self) strongSelf = weakSelf;
-        strongSelf.transform = (direction == MCViewShakeDirectionHorizontal) ?CGAffineTransformMakeTranslation(delta, 0) : CGAffineTransformMakeTranslation(0, delta);
-    } completion:^(BOOL finished) {
-        if (times <= 1) {
-            [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                typeof(self) strongSelf = weakSelf;
-                strongSelf.transform = CGAffineTransformIdentity;
-            } completion:^(BOOL finished) {
-                if (completion) {
-                    completion(finished);
-                }
-            }];
-        }
-        else {
-            typeof(self) strongSelf = weakSelf;
-            [strongSelf performShakeAnimationWithDirection:direction numberOfTimes:times-1 duration:duration delta:-delta completion:completion];
-        }
-    }];
+
+	[UIView animateWithDuration:duration delay:0 options:0 animations: ^{
+	    typeof(self) strongSelf = weakSelf;
+	    strongSelf.transform = (direction == MCViewShakeDirectionHorizontal) ? CGAffineTransformMakeTranslation(delta, 0) : CGAffineTransformMakeTranslation(0, delta);
+	} completion: ^(BOOL finished) {
+	    if (times <= 1) {
+	        [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations: ^{
+	            typeof(self) strongSelf = weakSelf;
+	            strongSelf.transform = CGAffineTransformIdentity;
+			} completion: ^(BOOL finished) {
+	            if (completion) {
+	                completion(finished);
+				}
+			}];
+		}
+	    else {
+	        typeof(self) strongSelf = weakSelf;
+	        [strongSelf performShakeAnimationWithDirection:direction numberOfTimes:times - 1 duration:duration delta:-delta completion:completion];
+		}
+	}];
 }
 
 - (void)performHorizontalShakeAnimationWithCompletion:(void (^)(BOOL finished))completion {
-    [self performShakeAnimationWithDirection:MCViewShakeDirectionHorizontal numberOfTimes:10 duration:0.04 delta:5 completion:completion];
+	[self performShakeAnimationWithDirection:MCViewShakeDirectionHorizontal numberOfTimes:10 duration:0.04 delta:5 completion:completion];
+}
+
+@end
+
+@implementation UIViewController (MCAdditions)
+
+- (void)presentViewController:(UIViewController *)viewController inNavigationControllerWithTransitioningDelegate:(id <UIViewControllerTransitioningDelegate> )delegate animated:(BOOL)animated completion:(void (^)(void))completion {
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+	navController.transitioningDelegate = delegate;
+
+	__weak typeof(self) weakSelf = self;
+	[self performBlock: ^{
+	    typeof(self) strongSelf = weakSelf;
+	    [strongSelf presentViewController:navController animated:animated completion:completion];
+	} afterInterval:0];
 }
 
 @end

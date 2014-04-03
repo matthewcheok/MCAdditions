@@ -42,3 +42,9 @@ typedef NS_ENUM(NSInteger, MCViewShakeDirection) {
 - (void)performHorizontalShakeAnimationWithCompletion:(void (^)(BOOL finished))completion;
 
 @end
+
+@interface UIViewController (MCAdditions)
+
+- (void)presentViewController:(UIViewController *)viewController inNavigationControllerWithTransitioningDelegate:(id<UIViewControllerTransitioningDelegate>)delegate animated:(BOOL)animated completion:(void (^)(void))completion;
+
+@end
