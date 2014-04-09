@@ -19,6 +19,7 @@
     [super viewDidLoad];
 
     self.minimumFooterHeight = 100;
+    self.tableView.delaysContentTouches = NO;
 }
 
 
