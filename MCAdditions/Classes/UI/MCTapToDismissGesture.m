@@ -39,7 +39,7 @@
     CGPoint location = [touch locationInView:self.view];
     UIView *view = [self.view hitTest:location withEvent:nil];
     if ([view isKindOfClass:[UITextView class]] ||
-        [view isKindOfClass:[UITextField class]]) {
+        [view isKindOfClass:[UIControl class]]) {
         return NO;
     }
 
