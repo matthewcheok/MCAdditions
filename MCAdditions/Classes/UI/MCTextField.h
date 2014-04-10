@@ -10,8 +10,13 @@
 
 @interface MCTextField : UITextField
 
-@property (nonatomic, strong) UIColor *placeholderTextColor;
-@property (nonatomic, assign) UIEdgeInsets textEdgeInsets;
-@property (nonatomic, assign) UIEdgeInsets clearButtonEdgeInsets;
+@property (strong, nonatomic) UIColor *placeholderTextColor;
+@property (assign, nonatomic) UIEdgeInsets textEdgeInsets;
+@property (assign, nonatomic) UIEdgeInsets clearButtonEdgeInsets;
+
+@property (assign, nonatomic, getter = hasValidContent, readonly) BOOL validContent;
+
+- (BOOL)checkValidityOfContentWithPrompt:(NSString *)prompt;
+- (BOOL)checkValidityOfContentWithShake;
 
 @end

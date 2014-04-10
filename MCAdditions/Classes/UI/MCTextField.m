@@ -7,6 +7,10 @@
 //
 
 #import "MCTextField.h"
+#import "MCAlertView.h"
+
+#import "UIView+MCAdditions.h"
+#import "NSString+MCAdditions.h"
 
 @implementation MCTextField
 
@@ -32,6 +36,51 @@
 		[self _initialize];
 	}
 	return self;
+}
+
+#pragma mark - Properties
+
+- (BOOL)hasValidContent {
+    if (!self.text || [self.text isEqualToString:@""]) {
+		return NO;
+	}
+	else if (self.keyboardType == UIKeyboardTypeEmailAddress) {
+		if (![self.text isValidEmailAddress]) {
+			return NO;
+		}
+	}
+	else if (self.keyboardType == UIKeyboardTypePhonePad) {
+		if (![self.text isValidPhoneNumber]) {
+			return NO;
+		}
+	}
+	return YES;
+}
+
+#pragma mark - Methods
+
+- (BOOL)checkValidityOfContentWithPrompt:(NSString *)prompt {
+    if ([self hasValidContent]) {
+        return YES;
+    }
+    else {
+        MCAlertView *alertView = [MCAlertView alertViewWithTitle:@"Whoops!" message:prompt actionButtonTitle:nil cancelButtonTitle:@"OK" completionHandler:^(BOOL cancelled) {
+            [self becomeFirstResponder];
+        }];
+        [alertView show];
+        
+        return NO;
+    }
+}
+
+- (BOOL)checkValidityOfContentWithShake {
+    if ([self hasValidContent]) {
+        return YES;
+    }
+    else {
+        [self performHorizontalShakeAnimationWithCompletion:nil];
+        return NO;
+    }
 }
 
 #pragma mark - UITextField
