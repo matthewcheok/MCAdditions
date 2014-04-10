@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, MCViewShakeDirection) {
 
 - (NSArray *)gestureRecognizersOfKindOfClass:(Class)class;
 - (NSArray *)subviewsOfKindOfClass:(Class)class;
-- (UIView *)superviewOfKindOfClass:(Class)class;
+- (id)superviewOfKindOfClass:(Class)class;
 
 #pragma mark - Animation
 

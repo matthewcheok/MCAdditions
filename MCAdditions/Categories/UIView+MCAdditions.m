@@ -63,7 +63,7 @@
 	return subviews;
 }
 
-- (UIView *)superviewOfKindOfClass:(Class)class {
+- (id)superviewOfKindOfClass:(Class)class {
 	UIView *superview = [self superview];
 	while (![superview isKindOfClass:class] && [superview superview] != nil)
 		superview = [superview superview];
