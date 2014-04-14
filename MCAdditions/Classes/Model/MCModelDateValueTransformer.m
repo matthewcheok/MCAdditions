@@ -6,19 +6,19 @@
 //
 //
 
-#import "MCDateValueTransformer.h"
+#import "MCModelDateValueTransformer.h"
 #import <ISO8601DateFormatter.h>
 
-NSString * const MCDateValueTransformerName = @"MCDateValueTransformerName";
-NSString * const MCDateTimeValueTransformerName = @"MCDateTimeValueTransformerName";
+NSString * const MCModelDateValueTransformerName = @"MCModelDateValueTransformerName";
+NSString * const MCModelDateTimeValueTransformerName = @"MCModelDateTimeValueTransformerName";
 
-@interface MCDateValueTransformer ()
+@interface MCModelDateValueTransformer ()
 
 @property (strong, nonatomic) ISO8601DateFormatter *formatter;
 
 @end
 
-@implementation MCDateValueTransformer
+@implementation MCModelDateValueTransformer
 
 + (void)load {
     @autoreleasepool {
