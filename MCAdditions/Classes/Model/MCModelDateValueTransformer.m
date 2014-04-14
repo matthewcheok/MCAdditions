@@ -22,8 +22,8 @@ NSString * const MCModelDateTimeValueTransformerName = @"MCModelDateTimeValueTra
 
 + (void)load {
     @autoreleasepool {
-        [NSValueTransformer setValueTransformer:[[self alloc] initWithFormatterDisplayingTime:NO] forName:MCDateValueTransformerName];
-        [NSValueTransformer setValueTransformer:[[self alloc] initWithFormatterDisplayingTime:YES] forName:MCDateTimeValueTransformerName];
+        [NSValueTransformer setValueTransformer:[[self alloc] initWithFormatterDisplayingTime:NO] forName:MCModelDateValueTransformerName];
+        [NSValueTransformer setValueTransformer:[[self alloc] initWithFormatterDisplayingTime:YES] forName:MCModelDateTimeValueTransformerName];
     }
 }
 
