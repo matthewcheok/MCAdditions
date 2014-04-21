@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'MCAdditions'
-  s.version  = '0.1.16'
+  s.version  = '0.1.17'
   s.platform = :ios, '7.0'
   s.license  = { :type => 'MIT', :file => 'LICENSE' }
   s.summary  = 'A host of useful utilties for any iOS application.'
