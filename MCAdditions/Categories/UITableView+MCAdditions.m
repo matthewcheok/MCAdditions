@@ -21,15 +21,18 @@
 	return nil;
 }
 
-- (void)makeActiveNextTextFieldAfterTextField:(UITextField *)textField {
-    UITableViewCell *cell = (UITableViewCell *)[textField superviewOfKindOfClass:[UITableViewCell class]];
+- (void)makeActiveNextTextContainerAfterTextContainer:(id)textContainer {
+    UITableViewCell *cell = (UITableViewCell *)[textContainer superviewOfKindOfClass:[UITableViewCell class]];
 	if (cell) {
 		NSIndexPath *indexPath = [self indexPathForCell:cell];
 		indexPath = [self nextIndexPathAfterIndexPath:indexPath];
 		if (indexPath) {
 			UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-			UITextField *textField = [[cell subviewsOfKindOfClass:[UITextField class]] firstObject];
-			[textField becomeFirstResponder];
+			id textContainer = [[cell subviewsOfKindOfClass:[UITextField class]] firstObject];
+            if (!textContainer) {
+                textContainer = [[cell subviewsOfKindOfClass:[UITextView class]] firstObject];
+            }
+			[textContainer becomeFirstResponder];
 		}
 	}
 }

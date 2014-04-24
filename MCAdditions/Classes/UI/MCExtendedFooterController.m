@@ -14,24 +14,34 @@
 
 @implementation MCExtendedFooterController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+#pragma mark - Methods
 
-    self.minimumFooterHeight = 100;
-    self.tableView.delaysContentTouches = NO;
+- (void)updateFooterHeight {
+	UIView *footerView = self.tableView.tableFooterView;
+	CGRect frame = footerView.frame;
+
+	frame.size.height = MAX(CGRectGetHeight(self.view.bounds) - CGRectGetMinY(footerView.frame) - self.topLayoutGuide.length, self.minimumFooterHeight);
+	footerView.frame = frame;
+	self.tableView.tableFooterView = footerView;
 }
 
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+
+	self.minimumFooterHeight = 100;
+	self.tableView.delaysContentTouches = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateFooterHeight];
+}
 
 - (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-
-    UIView *footerView = self.tableView.tableFooterView;
-    CGRect frame = footerView.frame;
-
-    frame.size.height = MAX(CGRectGetHeight(self.view.bounds) - CGRectGetMinY(footerView.frame) - self.topLayoutGuide.length, self.minimumFooterHeight);
-    footerView.frame = frame;
-    self.tableView.tableFooterView = footerView;
+	[super viewWillLayoutSubviews];
+	[self updateFooterHeight];
 }
 
 @end

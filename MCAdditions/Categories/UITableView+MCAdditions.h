@@ -10,6 +10,6 @@
 
 @interface UITableView (MCAdditions)
 
-- (void)makeActiveNextTextFieldAfterTextField:(UITextField *)textField;
+- (void)makeActiveNextTextContainerAfterTextContainer:(id)textContainer;
 
 @end
