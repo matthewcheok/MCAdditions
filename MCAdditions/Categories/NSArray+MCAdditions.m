@@ -22,4 +22,10 @@
     return [array copy];
 }
 
+- (instancetype)arrayByReplacingObjectAtIndex:(NSUInteger)index withObject:(id)object {
+    NSMutableArray *array = [self mutableCopy];
+    [array replaceObjectAtIndex:index withObject:object];
+    return [array copy];
+}
+
 @end

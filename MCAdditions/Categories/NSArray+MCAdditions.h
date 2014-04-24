@@ -12,5 +12,6 @@
 
 - (instancetype)arrayByInsertingObject:(id)object atIndex:(NSUInteger)index;
 - (instancetype)arrayByRemovingObjectAtIndex:(NSUInteger)index;
+- (instancetype)arrayByReplacingObjectAtIndex:(NSUInteger)index withObject:(id)object;
 
 @end
