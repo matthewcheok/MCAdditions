@@ -20,7 +20,7 @@
 	UIView *footerView = self.tableView.tableFooterView;
 	CGRect frame = footerView.frame;
 
-	frame.size.height = MAX(CGRectGetHeight(self.view.bounds) - CGRectGetMinY(footerView.frame) - self.topLayoutGuide.length, self.minimumFooterHeight);
+	frame.size.height = MAX(CGRectGetHeight(self.view.bounds) - CGRectGetMinY(footerView.frame), self.minimumFooterHeight);
 	footerView.frame = frame;
 	self.tableView.tableFooterView = footerView;
 }
@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	self.minimumFooterHeight = 100;
+	self.minimumFooterHeight = 0;
 	self.tableView.delaysContentTouches = NO;
 }
 
@@ -41,7 +41,7 @@
 
 - (void)viewWillLayoutSubviews {
 	[super viewWillLayoutSubviews];
-	[self updateFooterHeight];
+//	[self updateFooterHeight];
 }
 
 @end

@@ -12,4 +12,6 @@
 
 @property (assign, nonatomic) CGFloat minimumFooterHeight;
 
+- (void)updateFooterHeight;
+
 @end
