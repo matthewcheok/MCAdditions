@@ -6,3 +6,4 @@
 #import "NSArray+MCAdditions.h"
 
 #import "UIView+MCAdditions.h"
+#import "UIResponder+MCAdditions.h"

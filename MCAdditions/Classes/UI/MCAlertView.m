@@ -10,6 +10,7 @@
 
 #import "EXTScope.h"
 #import "UIColor+MCAdditions.h"
+#import "MCTransparentWindow.h"
 
 #define ARC4RANDOM_MAX 0x100000000
 
@@ -176,7 +177,9 @@ static CGFloat const kMCAlertViewMotionOffset = 15;
 }
 
 - (void)show {
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIWindow *window = [[self class] window];
+    window.hidden = NO;
+    
     CGRect bounds = window.bounds;
 
     self.backgroundView.alpha = 0;
@@ -221,6 +224,7 @@ static CGFloat const kMCAlertViewMotionOffset = 15;
     } completion:^(BOOL finished) {
         @strongify(self);
         [self removeFromSuperview];
+        [[[self class] window] setHidden:YES];
     }];
 }
 
@@ -229,6 +233,17 @@ static CGFloat const kMCAlertViewMotionOffset = 15;
     if (self.completionHandler) {
         self.completionHandler(sender == self.cancelButton);
     }
+}
+
+#pragma mark - Window
+
++ (UIWindow *)window {
+    static UIWindow *_window = nil;
+    if (!_window) {
+        _window = [MCTransparentWindow windowWithLevel:UIWindowLevelAlert];
+    }
+    
+    return _window;
 }
 
 @end
