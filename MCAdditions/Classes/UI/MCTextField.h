@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class MCTextField;
+@protocol MCTextFieldDelegate <UITextFieldDelegate>
+
+@optional
+- (void)textFieldDidChange:(MCTextField *)textField;
+
+@end
+
+
 @interface MCTextField : UITextField
 
+@property (weak, nonatomic) id <MCTextFieldDelegate> delegate;
 @property (strong, nonatomic) UIColor *placeholderTextColor;
 @property (assign, nonatomic) UIEdgeInsets textEdgeInsets;
 @property (assign, nonatomic) UIEdgeInsets clearButtonEdgeInsets;

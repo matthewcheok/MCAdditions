@@ -122,9 +122,24 @@
 
 #pragma mark - Private
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+}
+
 - (void)_initialize {
 	_textEdgeInsets = UIEdgeInsetsZero;
 	_clearButtonEdgeInsets = UIEdgeInsetsZero;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(__didChangeText:) name:UITextFieldTextDidChangeNotification object:nil];
+}
+
+- (void)__didChangeText:(NSNotification *)notification {
+    if (notification.object == self) {
+        [self invalidateIntrinsicContentSize];
+        if ([self.delegate respondsToSelector:@selector(textFieldDidChange:)]) {
+            [self.delegate textFieldDidChange:self];
+        }
+    }
 }
 
 @end

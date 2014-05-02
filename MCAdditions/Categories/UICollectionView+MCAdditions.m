@@ -44,4 +44,9 @@
     self.sizingCells[identifier] = [[cellClass alloc] init];
 }
 
+- (void)registerSizingCellWithReuseIdentifier:(NSString *)identifier {
+    UICollectionViewCell *cell = [self dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    self.sizingCells[identifier] = cell;
+}
+
 @end

@@ -11,6 +11,7 @@
 @interface UICollectionView (MCAdditions)
 
 - (id)sizingCellWithReuseIdentifier:(NSString *)identifier;
+- (void)registerSizingCellWithReuseIdentifier:(NSString *)identifier;
 
 - (void)registerSizingCellWithNib:(UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
 - (void)registerSizingCellWithClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
