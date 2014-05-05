@@ -36,12 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updateFooterHeight];
-}
-
-- (void)viewWillLayoutSubviews {
-	[super viewWillLayoutSubviews];
-//	[self updateFooterHeight];
+    [self performSelector:@selector(updateFooterHeight) withObject:nil afterDelay:0];
 }
 
 @end
