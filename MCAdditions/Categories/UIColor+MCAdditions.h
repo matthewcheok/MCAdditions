@@ -10,6 +10,8 @@
 
 @interface UIColor (MCAdditions)
 
+- (UIImage *)pixelImage;
+
 #pragma mark - Image Effects
 
 + (UIColor *)averageColorFromImage:(UIImage *)image;

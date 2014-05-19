@@ -10,6 +10,15 @@
 
 @implementation UIColor (MCAdditions)
 
+- (UIImage *)pixelImage {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), YES, 0);
+    [self setFill];
+    UIRectFill(CGRectMake(0, 0, 1, 1));
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 #pragma mark - Image Effects
 
 + (UIColor *)averageColorFromImage:(UIImage *)image {
