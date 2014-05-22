@@ -28,4 +28,13 @@
     return [array copy];
 }
 
+- (instancetype)arrayByReplacingObject:(id)oldObject withObject:(id)object {
+    NSMutableArray *array = [self mutableCopy];
+    NSUInteger index = [array indexOfObject:oldObject];
+    if (index != NSNotFound) {
+        [array replaceObjectAtIndex:index withObject:object];
+    }
+    return [array copy];
+}
+
 @end
