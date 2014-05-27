@@ -73,6 +73,15 @@
 	return nil;
 }
 
+- (UIViewController *)viewController {
+    id responder = self;
+    while (responder != nil && ![responder isKindOfClass:[UIViewController class]]) {
+        responder = [responder nextResponder];
+    }
+    
+    return responder;
+}
+
 #pragma mark - Animation
 
 + (void)animateWithKeyboardNotification:(NSNotification *)notification delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion {
