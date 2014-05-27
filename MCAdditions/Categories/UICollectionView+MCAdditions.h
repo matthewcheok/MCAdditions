@@ -10,6 +10,10 @@
 
 @interface UICollectionView (MCAdditions)
 
+- (void)reloadDataAnimated:(BOOL)animated;
+
+#pragma mark - Sizing
+
 - (id)sizingCellWithReuseIdentifier:(NSString *)identifier;
 - (void)registerSizingCellWithReuseIdentifier:(NSString *)identifier;
 

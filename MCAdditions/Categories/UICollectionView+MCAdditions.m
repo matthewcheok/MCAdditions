@@ -32,6 +32,21 @@
 
 @implementation UICollectionView (MCAdditions)
 
+- (void)reloadDataAnimated:(BOOL)animated {
+	[self reloadData];
+    
+	if (animated) {
+		CATransition *animation = [CATransition animation];
+		[animation setType:kCATransitionFade];
+		[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+		[animation setFillMode:kCAFillModeBoth];
+		[animation setDuration:.3];
+		[[self layer] addAnimation:animation forKey:@"UITableViewReloadDataAnimationKey"];
+	}
+}
+
+#pragma mark - Sizing
+
 - (id)sizingCellWithReuseIdentifier:(NSString *)identifier {
     return self.sizingCells[identifier];
 }

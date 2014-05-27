@@ -66,7 +66,6 @@
 	if (animated) {
 		CATransition *animation = [CATransition animation];
 		[animation setType:kCATransitionFade];
-//		[animation setSubtype:kCATransitionFromBottom];
 		[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 		[animation setFillMode:kCAFillModeBoth];
 		[animation setDuration:.3];
