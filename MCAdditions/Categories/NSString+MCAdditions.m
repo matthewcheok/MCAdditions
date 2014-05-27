@@ -15,7 +15,7 @@
 #pragma mark - Convenience
 
 - (BOOL)isNotEmpty {
-    return ![self isEqualToString:@""];
+    return [[self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] > 0;
 }
 
 #pragma mark - Validation
