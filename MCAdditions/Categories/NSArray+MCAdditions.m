@@ -17,8 +17,18 @@
 }
 
 - (instancetype)arrayByRemovingObjectAtIndex:(NSUInteger)index {
+    if (index >= [self count]) {
+        return self;
+    }
+
     NSMutableArray *array = [self mutableCopy];
     [array removeObjectAtIndex:index];
+    return [array copy];
+}
+
+- (instancetype)arrayByRemovingObject:(id)object {
+    NSMutableArray *array = [self mutableCopy];
+    [array removeObject:object];
     return [array copy];
 }
 
