@@ -13,4 +13,9 @@
 - (UIColor *)averageColor;
 - (UIColor *)contrastingColor;
 
+- (UIImage *)imageByCroppingToBounds:(CGRect)bounds;
+- (UIImage *)imageByScalingToSize:(CGSize)size;
+- (UIImage *)imageByScalingToSize:(CGSize)size contentMode:(UIViewContentMode)contentMode;
+- (UIImage *)imageByScalingToSize:(CGSize)size contentMode:(UIViewContentMode)contentMode interpolationQuality:(CGInterpolationQuality)quality;
+
 @end

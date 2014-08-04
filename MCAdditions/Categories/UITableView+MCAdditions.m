@@ -56,6 +56,7 @@
 				textContainer = [[cell subviewsOfKindOfClass:[UITextView class]] firstObject];
 			}
 			[textContainer becomeFirstResponder];
+            [self scrollRectToVisible:cell.frame animated:YES];
 		}
 	}
 }
