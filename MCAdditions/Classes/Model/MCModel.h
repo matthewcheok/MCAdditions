@@ -39,6 +39,7 @@
  *  @return Class of items in collection
  */
 + (Class)collectionItemClassForKey:(NSString *)key;
++ (NSDictionary *)JSONKeyPathsByPropertyKey;
 
 /**
  *  Updates properties of current model from JSON dictionary representation

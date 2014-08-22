@@ -7,7 +7,6 @@
 //
 
 #import "MCTextField.h"
-#import "MCAlertView.h"
 
 #import "UIView+MCAdditions.h"
 #import "NSString+MCAdditions.h"
@@ -64,11 +63,11 @@
         return YES;
     }
     else {
-        MCAlertView *alertView = [MCAlertView alertViewWithTitle:@"Whoops!" message:prompt actionButtonTitle:nil cancelButtonTitle:@"OK" completionHandler:^(BOOL cancelled) {
-            [self becomeFirstResponder];
-        }];
-        [alertView show];
-        
+        // MCAlertView *alertView = [MCAlertView alertViewWithTitle:@"Whoops!" message:prompt actionButtonTitle:nil cancelButtonTitle:@"OK" completionHandler:^(BOOL cancelled) {
+        //     [self becomeFirstResponder];
+        // }];
+        // [alertView show];
+
         return NO;
     }
 }
@@ -112,7 +111,7 @@
 
     CGFloat offset = (CGRectGetHeight(rect) - [self.font lineHeight])/2;
     rect = CGRectInset(rect, 0, offset);
-    
+
 	[self.placeholder drawInRect:rect withAttributes:@{
 	     NSFontAttributeName: self.font,
          NSForegroundColorAttributeName: self.placeholderTextColor,
@@ -129,7 +128,7 @@
 - (void)_initialize {
 	_textEdgeInsets = UIEdgeInsetsZero;
 	_clearButtonEdgeInsets = UIEdgeInsetsZero;
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(__didChangeText:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
