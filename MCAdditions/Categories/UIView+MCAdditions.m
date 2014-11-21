@@ -96,6 +96,10 @@
 		case MCViewAnimationStylePop:
 			[self performAnimationInPopStyleWithDuration:duration delay:delay completion:completion];
 			break;
+            
+        case MCViewAnimationStylePopInside:
+            [self performAnimationInPopInsideStyleWithDuration:duration delay:delay completion:completion];
+            break;
 
 		case MCViewAnimationStyleMorph:
 			[self performAnimationInMorphStyleWithDuration:duration delay:delay completion:completion];
@@ -123,6 +127,22 @@
 	        completion(finished);
 		}
 	}];
+}
+
+- (void)performAnimationInPopInsideStyleWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay completion:(void (^)(BOOL finished))completion {
+    self.transform = CGAffineTransformIdentity;
+    [UIView animateKeyframesWithDuration:duration delay:delay options:0 animations: ^{
+        [UIView addKeyframeWithRelativeStartTime:0 / 2.0 relativeDuration:1 / 2.0 animations: ^{
+            self.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        }];
+        [UIView addKeyframeWithRelativeStartTime:1 / 2.0 relativeDuration:1 / 2.0 animations: ^{
+            self.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }];
+    } completion: ^(BOOL finished) {
+        if (completion) {
+            completion(finished);
+        }
+    }];
 }
 
 - (void)performAnimationInMorphStyleWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay completion:(void (^)(BOOL finished))completion {

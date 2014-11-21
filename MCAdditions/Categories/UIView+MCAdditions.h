@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSInteger, MCViewAnimationStyle) {
     MCViewAnimationStyleNone = 0,
     MCViewAnimationStylePop,
+    MCViewAnimationStylePopInside,
     MCViewAnimationStyleMorph
 };
 
